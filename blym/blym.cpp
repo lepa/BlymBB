@@ -19,14 +19,15 @@ String GET ( String& varname )
 	char* p;
 	String query, res="";
 
+// If there is a get request 
 	if ((( p = std::getenv( "QUERY_STRING" )) != NULL) )	
 	{
 		query = p;
 
-		if ( query.find( varname ) != -1 )
-			res = query.substr (
-				query.find ( varname ),
-				query.find ( "&" )
+		if ( query.find( varname ) != -1 )    //If find varname
+			res = query.substr (		   //Create a substring
+				query.find ( varname )+1,   //That starts at varname's position +1
+				query.find ( "&" )          //And ends when finds an & or at the end of the string
 			);
 	} 
 
@@ -39,13 +40,14 @@ String POST ( String& varname )
 	String query, res="";
 	int length;
 
+	//Gets the content length
 	if ( std::sscanf( getenv("CONTENT_LENGTH"), "%d", &length ) == 1 ) 
 	{
 		std::getline (std::cin, query, '\0' );
 	
-		if ( query.find( varname ) != -1 )
+		if ( query.find( varname ) != -1 ) 
 			res = query.substr (
-				query.find ( varname ),
+				query.find ( varname )+1,
 				query.find ( "&" )
 			);
 	} 
