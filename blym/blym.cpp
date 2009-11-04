@@ -18,7 +18,7 @@ void sput::echo (String allyouwant)
 
 
 //Method to find GET requests
-String GET ( String& varname )
+String sput::GET ( String& varname )
 {
 	char* p;
 	String query, res="";
@@ -41,7 +41,7 @@ String GET ( String& varname )
 
 
 //Method to find POST requests
-String POST ( String& varname )
+String sput::POST ( String& varname )
 {
 	String query, res="";
 	int length;
@@ -63,4 +63,6 @@ String POST ( String& varname )
 
 
 
+//Method that emulate php's $_SERVER
+//template <class X>
 
