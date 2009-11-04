@@ -17,7 +17,7 @@ void sput::echo (String allyouwant)
 String GET ( String& varname )
 {
 	char *p;
-	String res,query;
+	String query, res="";
 
 	if ((( p = std::getenv( "QUERY_STRING" )) != NULL) )	
 	{
