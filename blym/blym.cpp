@@ -16,7 +16,7 @@ void sput::echo (String allyouwant)
 //Method to find GET requests
 String GET ( String& varname )
 {
-	char *p;
+	char* p;
 	String query, res="";
 
 	if ((( p = std::getenv( "QUERY_STRING" )) != NULL) )	
@@ -32,4 +32,27 @@ String GET ( String& varname )
 
 	return res;
 }
+
+//Method to find POST requests
+String POST ( String& varname )
+{
+	String query, res="";
+	int length;
+
+	if ( std::sscanf( getenv("CONTENT_LENGTH"), "%d", &length ) == 1 ) 
+	{
+		std::getline (std::cin, query, '\0' );
+	
+		if ( query.find( varname ) != -1 )
+			res = query.substr (
+				query.find ( varname ),
+				query.find ( "&" )
+			);
+	} 
+
+	return res;
+}
+
+
+
 

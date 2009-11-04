@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
-
+#include <cstdio>
 
 typedef std::string String;
 
