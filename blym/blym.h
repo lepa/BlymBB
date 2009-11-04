@@ -2,14 +2,13 @@
 #include <string>
 
 
-class String : public std::string;
-
+typedef std::string String;
 
 class sput
 {
 public:
 	sput();
-	void echo ( String& allyouwant ); 
+	void echo ( String allyouwant ); 
 	String get ( String& varname );
 	String post ( String& varname );
 };
