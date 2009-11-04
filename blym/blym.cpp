@@ -7,11 +7,15 @@ sput::sput ()
 	this->echo("Content-type: text/html\n\n");
 }
 
+
+
 //Method to send queries in output
 void sput::echo (String allyouwant)
 {
 	std::cout  << allyouwant;
 }
+
+
 
 //Method to find GET requests
 String GET ( String& varname )
@@ -33,6 +37,8 @@ String GET ( String& varname )
 
 	return res;
 }
+
+
 
 //Method to find POST requests
 String POST ( String& varname )
