@@ -60,9 +60,3 @@ String sput::POST ( String& varname )
 
 	return res;
 }
-
-
-
-//Method that emulate php's $_SERVER
-//template <class X>
-
