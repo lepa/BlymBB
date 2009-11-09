@@ -64,7 +64,7 @@ String sput::POST ( String& varname )
 
 
 //Method to get the web client ip
-char* get_remote_ip()
+char* get_client_ip()
 {
 	return getenv ( "REMOTE_ADDR" );
 }
