@@ -12,6 +12,7 @@ public:
 	void echo ( String allyouwant ); 
 	String GET ( String& varname );
 	String POST ( String& varname );
+	char* get_remote_ip();
 };
 
 
