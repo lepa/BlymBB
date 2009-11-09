@@ -68,3 +68,30 @@ char* get_client_ip()
 {
 	return getenv ( "REMOTE_ADDR" );
 }
+
+
+
+//The name is explicative
+String htmlentities ( String to_escape )
+{
+	int i=0;
+	char* entity;
+
+	do {
+		if ( (to_escape[i] >= 'A' && to_escape[i] <= 'Z') || 
+			(to_escape[i] >= 'a' && to_escape[i] <= 'z') || 
+			(to_escape[i] >= '0' && to_escape[i] <= '9') )  
+		{
+			i++; 
+		}
+		else 
+		{
+			std::sprintf ( entity, "&#%2d;", (int) to_escape[i] );
+			to_escape.replace ( i, 1, entity );
+			i += std::strlen (entity );
+		}
+	} while ( i < to_escape.length() );
+
+	return to_escape;
+}
+
