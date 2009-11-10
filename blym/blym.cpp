@@ -1,7 +1,7 @@
 #include "blym.h"
 
 // Constructor
-sput::sput ()
+blym::blym ()
 {
 	//Says that the content is simple html 
 	this->echo("Content-type: text/html\n\n");
@@ -10,7 +10,7 @@ sput::sput ()
 
 
 //Method to send queries in output
-void sput::echo (String allyouwant)
+void blym::echo (String allyouwant)
 {
 	std::cout  << allyouwant;
 }
@@ -18,7 +18,7 @@ void sput::echo (String allyouwant)
 
 
 //Method to find GET requests
-String sput::GET ( String& varname )
+String blym::GET ( String& varname )
 {
 	char* p;
 	String query, res="";
@@ -41,7 +41,7 @@ String sput::GET ( String& varname )
 
 
 //Method to find POST requests
-String sput::POST ( String& varname )
+String blym::POST ( String& varname )
 {
 	String query, res="";
 	int length;
@@ -64,7 +64,7 @@ String sput::POST ( String& varname )
 
 
 //Method to get the web client ip
-char* sput::get_client_ip()
+char* blym::get_client_ip()
 {
 	return getenv ( "REMOTE_ADDR" );
 }
@@ -72,7 +72,7 @@ char* sput::get_client_ip()
 
 
 //The name is explicative
-String sput::htmlentities ( String to_escape )
+String blym::htmlentities ( String to_escape )
 {
 	int i=0;
 	char* entity;

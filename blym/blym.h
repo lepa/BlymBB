@@ -6,10 +6,10 @@
 
 typedef std::string String;
 
-class sput
+class blym
 {
 public:
-	sput();
+	blym();
 	void echo ( String ); 
 	String GET ( String& );
 	String POST ( String& );
