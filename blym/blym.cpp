@@ -72,7 +72,7 @@ char* blym::get_client_ip()
 
 
 //The name is explicative
-String blym::htmlentities ( String to_escape )
+String blym::htmlentities ( String& to_escape )
 {
 	int i=0;
 	char* entity;
@@ -91,6 +91,22 @@ String blym::htmlentities ( String to_escape )
 			i += std::strlen (entity );
 		}
 	} while ( i < to_escape.length() );
+
+	return to_escape;
+}
+
+
+
+//Method to change new lines with <br />
+String blym::nl2br ( String& to_escape )
+{
+	int i = 0;
+
+	while ( (i = to_escape.find ('\n', i)) != -1 )
+	{
+		to_escape.replace ( i, 1, "<br />" );
+		i++;
+	}
 
 	return to_escape;
 }

@@ -14,7 +14,8 @@ public:
 	String GET ( String& );
 	String POST ( String& );
 	char* get_client_ip();
-	String htmlentities ( String );
+	String htmlentities ( String& );
+	String nl2br ( String& );
 };
 
 
