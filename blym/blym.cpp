@@ -15,6 +15,10 @@ void blym::echo (String allyouwant)
 	std::cout  << allyouwant;
 }
 
+blym& blym::operator<<(String& allyouwant)
+{
+	this->echo(allyouwant);
+}
 
 
 //Method to find GET requests
@@ -109,5 +113,59 @@ String blym::nl2br ( String& to_escape )
 	}
 
 	return to_escape;
+}
+
+
+
+//Method used to get the content of files or web pages
+String blym::file_get_contents (String& name )
+{
+	int i = 0;
+	String content;
+
+	if ( name.compare(0,7, "http://") == 0 )
+	{
+		int sock = socket ( AF_INET, SOCK_STREAM, 0 );
+		struct hostent *hostinfo;
+		struct sockaddr_in addr;
+		String message = "GET "+name.substr (name.find('/',8), -1 );
+		char buffer[100];
+
+		hostinfo = gethostbyname ( name.substr(6,name.find('/',8)).c_str() );
+			
+		if ( !hostinfo || sock < 3 )
+			throw ConnError;
+		
+
+		addr.sin_family = AF_INET;
+		addr.sin_port   = 80;
+		addr.sin_addr   = *(struct in_addr* ) *hostinfo->h_addr_list;
+
+		if ( connect ( sock, (struct sockaddr* ) &addr, sizeof (addr) ) != 0 )
+			throw ConnError;
+
+		send ( sock, message.c_str(), message.length(), 0 );
+
+		while ( recv ( sock, (void*) buffer, 100, 0 ) > 0 )
+		{
+			content+=buffer;
+			memset (buffer, '\0', 100);
+		}
+	} 
+	else 
+	{
+		std::stringbuf buffer;
+		std::ifstream file ( name.c_str() );
+		
+		if (file.fail() )
+			throw FOpenError;
+
+		file.get ( buffer );
+		content = buffer.str();
+
+		file.close();
+	}
+
+	return content;
 }
 
