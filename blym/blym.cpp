@@ -64,7 +64,7 @@ String sput::POST ( String& varname )
 
 
 //Method to get the web client ip
-char* get_client_ip()
+char* sput::get_client_ip()
 {
 	return getenv ( "REMOTE_ADDR" );
 }
@@ -72,7 +72,7 @@ char* get_client_ip()
 
 
 //The name is explicative
-String htmlentities ( String to_escape )
+String sput::htmlentities ( String to_escape )
 {
 	int i=0;
 	char* entity;
