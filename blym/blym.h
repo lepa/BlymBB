@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <sstream>
 #include <cstdlib>
 #include <cstdio>
@@ -9,24 +8,25 @@
 #include <sys/socket.h>
 #include <netdb.h>
 
-#define SAFE 1;
-#define UNSAFE 0;
-
 typedef std::string String;
-
 
 class blym
 {
 public:
 	blym();
+
 	void echo ( String ); 
 	blym& operator<<( String& );
-	String GET ( String& );
-	String POST ( String& );
+	
+	String GET ( String );
+	String POST ( String );
+	String COOKIE ( String );
+	
 	char* get_client_ip();
-	String htmlentities ( String& );
-	String nl2br ( String& );
-	String file_get_contents (String& name );
+	
+	String& htmlentities ( String& );
+	String& nl2br ( String& );
+	String file_get_contents (String& );
 };
 
 
@@ -35,9 +35,9 @@ class fileExists : public std::exception
 {
 	const char* what() const throw()
 	{
-		return "Already a file with the same name of the one you tryed to save";
+		return "This file exists";
 	}
-} FileExists;
+};
 
 class fOpenError : public std::exception
 {
@@ -45,7 +45,7 @@ class fOpenError : public std::exception
 	{
 		return "Error while opening a file";
 	}
-} FOpenError;
+};
 
 class connError : public std::exception
 {
@@ -53,4 +53,4 @@ class connError : public std::exception
 	{
 		return "Error while connecting to the internet";
 	}
-} ConnError;
+};

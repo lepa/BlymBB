@@ -1,4 +1,9 @@
 #include "blym.h"
+//Exception objects
+fileExists FileExists;
+connError ConnError;
+fOpenError FOpenError;
+
 
 // Constructor
 blym::blym ()
@@ -23,7 +28,7 @@ blym& blym::operator<<(String& allyouwant)
 
 
 //Method to find GET requests
-String blym::GET ( String& varname )
+String blym::GET ( String varname )
 {
 	char* p;
 	String query, res="";
@@ -47,7 +52,7 @@ String blym::GET ( String& varname )
 
 
 //Method to find POST requests
-String blym::POST ( String& varname )
+String blym::POST ( String varname )
 {
 	String query, res="";
 	int length;
@@ -81,7 +86,7 @@ char* blym::get_client_ip()
 
 
 //The name is explicative
-String blym::htmlentities ( String& to_escape )
+String& blym::htmlentities ( String& to_escape )
 {
 	int i=0;
 	char* entity;
@@ -107,7 +112,7 @@ String blym::htmlentities ( String& to_escape )
 
 
 //Method to change new lines with <br />
-String blym::nl2br ( String& to_escape )
+String& blym::nl2br ( String& to_escape )
 {
 	int i = 0;
 
@@ -172,4 +177,18 @@ String blym::file_get_contents (String& name )
 	}
 
 	return content;
+}
+
+
+
+//Method for cookies
+String blym::COOKIE ( String name )
+{
+	String cookies = std::getenv ("HTTP_COOKIE");
+
+	return cookies.substr ( 
+			cookies.find (name)
+			+ name.length() + 1,
+			cookies.find ("; ")
+			);
 }
