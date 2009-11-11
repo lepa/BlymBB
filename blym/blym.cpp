@@ -17,7 +17,7 @@ void blym::echo (String allyouwant)
 
 blym& blym::operator<<(String& allyouwant)
 {
-	this->echo(allyouwant);
+	std::cout  << allyouwant;
 }
 
 
