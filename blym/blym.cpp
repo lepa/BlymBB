@@ -21,6 +21,7 @@ blym& blym::operator<<(String& allyouwant)
 }
 
 
+
 //Method to find GET requests
 String blym::GET ( String& varname )
 {
@@ -168,4 +169,3 @@ String blym::file_get_contents (String& name )
 
 	return content;
 }
-
