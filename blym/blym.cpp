@@ -4,7 +4,7 @@
 blym::blym ()
 {
 	//Says that the content is simple html 
-	this->echo("Content-type: text/html\n\n");
+	this->echo("Content-type: text/html\r\n");
 }
 
 
