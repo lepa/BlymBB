@@ -35,7 +35,8 @@ String blym::GET ( String& varname )
 
 		if ( query.find( varname ) != -1 )    //If find varname
 			res = query.substr (		   //Create a substring
-				query.find ( varname )+1,   //That starts at varname's position +1
+				query.find ( varname ) +
+				varname.length() + 1,   //That starts at varname's position +1
 				query.find ( "&" )          //And ends when finds an & or at the end of the string
 			);
 	} 
@@ -50,15 +51,18 @@ String blym::POST ( String& varname )
 {
 	String query, res="";
 	int length;
+	std::stringbuf buffer;
 
 	//Gets the content length
 	if ( std::sscanf( getenv("CONTENT_LENGTH"), "%d", &length ) == 1 ) 
 	{
-		std::getline (std::cin, query, '\0' );
-	
+		std::cin.get (buffer);
+		query = buffer.str();
+			
 		if ( query.find( varname ) != -1 ) 
 			res = query.substr (
-				query.find ( varname )+1,
+				query.find ( varname ) +
+				varname.length() + 1,
 				query.find ( "&" )
 			);
 	} 
