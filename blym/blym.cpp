@@ -193,10 +193,4 @@ String blym::COOKIE ( String name )
 			cookies.find ("; ")
 			);
 }
-int main ()
-{
-   blym Diocane;
-   String suca = Diocane.file_get_contents ("/home/bronsa/.zshrc");
-   std::cout << suca ;
-}
 
