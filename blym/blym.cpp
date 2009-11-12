@@ -9,7 +9,7 @@ fOpenError FOpenError;
 blym::blym ()
 {
 	//Says that the content is simple html 
-	this->echo("Content-type: text/html\r\n");
+	this->echo("Content-type: text/html\n\n");
 }
 
 
@@ -128,7 +128,7 @@ String& blym::nl2br ( String& to_escape )
 
 
 //Method used to get the content of files or web pages
-String blym::file_get_contents (String& name )
+String blym::file_get_contents (String name )
 {
 	int i = 0;
 	String content;
@@ -169,11 +169,12 @@ String blym::file_get_contents (String& name )
 		
 		if (file.fail() )
 			throw FOpenError;
-
-		file.get ( buffer );
-		content = buffer.str();
-
-		file.close();
+		String sent;
+		while (getline(file,sent))
+		{
+			content.append (sent.append ("\n"));
+		}
+	file.close();
 	}
 
 	return content;
@@ -192,3 +193,10 @@ String blym::COOKIE ( String name )
 			cookies.find ("; ")
 			);
 }
+int main ()
+{
+   blym Diocane;
+   String suca = Diocane.file_get_contents ("/home/bronsa/.zshrc");
+   std::cout << suca ;
+}
+
