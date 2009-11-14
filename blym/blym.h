@@ -20,7 +20,7 @@ public:
 	String POST (String);
 	String COOKIE (String);
 	String file_get_contents (String);
-	String sql_escape (String)
+	String sql_escape (String);
 
 	char* get_client_ip ();
 	
