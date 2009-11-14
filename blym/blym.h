@@ -12,21 +12,21 @@ typedef std::string String;
 class blym
 {
 public:
-	blym();
+	blym ();
 
-	void echo ( String ); 
-	blym& operator<<( String& );
+	void echo (String); 
 	
-	String GET ( String );
-	String POST ( String );
-	String COOKIE ( String );
+	String GET (String);
+	String POST (String);
+	String COOKIE (String);
+	String file_get_contents (String);
+	String sql_escape (String)
+
+	char* get_client_ip ();
 	
-	char* get_client_ip();
-	
-	String& htmlentities ( String& );
-	String& nl2br ( String& );
- 	String file_get_contents ( String ); 
-	String sql_escape( String );
+	String& htmlentities (String&);
+	String& nl2br (String&);
+
 protected :
 	static int save_data(char*, size_t, size_t, String*);
 };
@@ -34,15 +34,15 @@ protected :
 //The exceptions
 class fileExists : public std::exception
 {
-	const char* what() const throw()
+	const char* what () const throw()
 	{
 		return "This file exists";
-	}
+ 	}
 };
 
 class fOpenError : public std::exception
 {
-	const char* what() const throw()
+	const char* what () const throw()
 	{
 		return "Error while opening a file";
 	}
@@ -50,7 +50,7 @@ class fOpenError : public std::exception
 
 class connError : public std::exception
 {
-	const char* what() const throw()
+	const char* what () const throw()
 	{
 		return "Error while connecting to the internet";
 	}

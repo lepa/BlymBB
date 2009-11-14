@@ -9,7 +9,7 @@ fOpenError FOpenError;
 blym::blym ()
 {
 	//Says that the content is simple html 
-	this->echo("Content-type: text/html\n\n");
+	this->echo ("Content-type: text/html\n\n");
 }
 
 
@@ -26,44 +26,44 @@ void blym::echo (String allyouwant)
 String blym::GET (String varname)
 {
 	char* p;
-	String query, res="";
+	String quer y, res="";
 
 // If there is a get request 
-	if ((( p = std::getenv( "QUERY_STRING" )) != NULL) )	
+	if ((( p = std::getenv ( "QUERY_STRING" )) != NULL) )	
 	{
 		query = p;
 
-		if ( query.find( varname ) != -1 )    //If find varname
+		if (query.find (varname) != -1)    //If find varname
 			res = query.substr (		   //Create a substring
-				query.find ( varname ) +
-				varname.length() + 1,   //That starts at varname's position +1
-				query.find ( "&" )          //And ends when finds an & or at the end of the string
-			);
+				query.find (varname) +
+				varname.length () + 1,   //That starts at varname's position +1
+				query.find ("&")          //And ends when finds an & or at the end of the string
+			); 
 	} 
 
-	return res;
+	return res; 
 }
 
 
 
 //Method to find POST requests
-String blym::POST ( String varname )
+String blym::POST (String varname)
 {
-	String query, res="";
+	String query,  res = "";
 	int length;
 	std::stringbuf buffer;
 
 	//Gets the content length
-	if ( std::sscanf( getenv("CONTENT_LENGTH"), "%d", &length ) == 1 ) 
+	if (std::sscanf (getenv ("CONTENT_LENGTH"), "%d", &length) == 1) 
 	{
-		std::cin.get (buffer);
-		query = buffer.str();
+		std::cin.get (buffer); 
+		query = buffer.str ();
 			
-		if ( query.find( varname ) != -1 ) 
+		if (query.find (varname) != -1) 
 			res = query.substr (
-				query.find ( varname ) +
-				varname.length() + 1,
-				query.find ( "&" )
+				query.find (varname) +
+				varname.length () + 1,
+				query.find ("&")
 			);
 	} 
 
@@ -75,31 +75,31 @@ String blym::POST ( String varname )
 //Method to get the web client ip
 char* blym::get_client_ip()
 {
-	return getenv ( "REMOTE_ADDR" );
+	return getenv ("REMOTE_ADDR");
 }
 
 
 
 //The name is explicative
-String& blym::htmlentities ( String& to_escape )
+String& blym::htmlentities (String& to_escape)
 {
-	int i=0;
+	int i = 0; 
 	char* entity;
 
 	do {
 		if ( (to_escape[i] >= 'A' && to_escape[i] <= 'Z') || 
 			(to_escape[i] >= 'a' && to_escape[i] <= 'z') || 
-			(to_escape[i] >= '0' && to_escape[i] <= '9') )  
+		 	(to_escape[i] >= '0' && to_escape[i] <= '9') )  
 		{
 			i++; 
 		}
 		else 
 		{
-			std::sprintf ( entity, "&#%2d;", (int) to_escape[i] );
-			to_escape.replace ( i, 1, entity );
-			i += std::strlen (entity );
-		}
-	} while ( i < to_escape.length() );
+			std::sprintf (entity, "&#%2d;", (int) to_escape[i]);
+			to_escape.replace (i, 1, entity);
+			i += std::strlen (entity ); 
+		} 
+	} while (i < to_escape.length ());
 
 	return to_escape;
 }
@@ -111,21 +111,21 @@ String& blym::nl2br ( String& to_escape )
 {
 	int i = 0;
 
-	while ( (i = to_escape.find ('\n', i)) != -1 )
+	while ( (i = to_escape.find ('\n', i)) != -1)
 	{
-		to_escape.replace ( i, 1, "<br />" );
+		to_escape.replace (i, 1, "<br />"); 
 		i++;
 	}
 
-	return to_escape;
+	return to_escape; 
 }
 // Needed for cURL 
 int blym::save_data (char *data, size_t size, size_t nsize, String *buffer)
 {
- 	int result = 0;
+  	int result = 0;
 	if (buffer != NULL)
 	{
-		buffer->append(data, size * nsize);
+ 		buffer->append (data, size * nsize);
  		result  = size * nsize;
 	}
 	return result;
@@ -139,55 +139,54 @@ String blym::file_get_contents (String name)
 	int i = 0;
 	if (name.compare (0,7, "http://") == 0)
 	{
-		CURL* ch = curl_easy_init();
-		curl_easy_setopt (ch, CURLOPT_URL, (name.substr(7,name.find('/',8))).c_str());
+		CURL* ch = curl_easy_init ();
+		curl_easy_setopt (ch, CURLOPT_URL, (name.substr (7,name.find ('/',8))).c_str ());
 		curl_easy_setopt (ch, CURLOPT_HEADER, 0);
-		curl_easy_setopt (ch,CURLOPT_WRITEFUNCTION, blym::save_data); 
+		curl_easy_setopt (ch, CURLOPT_WRITEFUNCTION, blym::save_data); 
 		curl_easy_setopt (ch, CURLOPT_WRITEDATA,&content);
 		curl_easy_perform (ch);
-		curl_easy_cleanup (ch);
+		curl_easy_c leanup (ch);
 	} 
 	else 
 	{
  		std::stringbuf buffer;
-		std::ifstream file ( name.c_str() );
+		std::ifstream file (name.c_str ());
 		
-		if (file.fail() )
-			throw FOpenError;
+		if (file.fail ())
+			throw ConnError;
 		String sent;
-		while (getline(file,sent))
+		while (getline (file, sent))
 		{
 			content.append (sent.append ("\n"));
-		}
-	file.close();
+		} 
+	file.close ();
 	}
 
- 	return content;
+ 	return content; 
 }
 
 
 
 //Method for cookies
-String blym::COOKIE ( String name )
+String blym::COOKIE (String name)
 {
 	String cookies = std::getenv ("HTTP_COOKIE");
 
 	return cookies.substr ( 
-			cookies.find (name)
-			+ name.length() + 1,
+			cookies.find  (name)
+			+ name.length () + 1,
 			cookies.find ("; ")
 			);
 }
 
 String blym::sql_escape (String query)
 {
-	int i;
 	String keys[] = {"INSERT","AND","UNION","SELECT","CONCAT","/","+"," "};
-	for (i=0;i<=(sizeof(keys)/sizeof(String));i++)  {
-		if (query.find(keys[i])!=String::npos)
-			return query.erase(query.find(keys[i]));
+	for (int i=0; i<= (sizeof (keys) / sizeof (String)); i++)  {
+		if (query .find (keys[i]) != String::npos)
+			return query.erase (query.find (keys[i]));
 		else
-			continue;
+			continue; 
 	}
-	return query;
+	return query; 
 }
