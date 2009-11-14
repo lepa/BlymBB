@@ -4,4 +4,3 @@ install:
 	cp libblym.so /usr/lib/
 test:
 	g++ -o test -lblym test.cpp
-
