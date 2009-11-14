@@ -26,7 +26,7 @@ void blym::echo (String allyouwant)
 String blym::GET (String varname)
 {
 	char* p;
-	String quer y, res="";
+	String query, res="";
 
 // If there is a get request 
 	if ((( p = std::getenv ( "QUERY_STRING" )) != NULL) )	
