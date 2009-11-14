@@ -26,8 +26,9 @@ public:
 	String& htmlentities ( String& );
 	String& nl2br ( String& );
  	String file_get_contents (String ); 
+
 protected :
-	static int save_data(char*, size_t, size_t, String*);
+	int save_data(char*, size_t, size_t, String*);
 };
 
 //The exceptions

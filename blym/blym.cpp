@@ -119,23 +119,22 @@ String& blym::nl2br ( String& to_escape )
 
 	return to_escape;
 }
-
-String content;
-//Huh that's.. MMM cool
+// Needed for cURL 
 int blym::save_data (char *data, size_t size, size_t nsize, String *buffer)
 {
-	int result = 0;
+ 	int result = 0;
 	if (buffer != NULL)
 	{
 		buffer->append(data, size * nsize);
-		result  = size * nsize;
+ 		result  = size * nsize;
 	}
 	return result;
 }
 
+String content 
+
 //Method used to get the content of files or web pages
 String blym::file_get_contents (String name)
-
 {
 	int i = 0;
 	if (name.compare (0,7, "http://") == 0)
@@ -150,7 +149,7 @@ String blym::file_get_contents (String name)
 	} 
 	else 
 	{
-		std::stringbuf buffer;
+ 		std::stringbuf buffer;
 		std::ifstream file ( name.c_str() );
 		
 		if (file.fail() )
@@ -163,7 +162,7 @@ String blym::file_get_contents (String name)
 	file.close();
 	}
 
-	return content;
+ 	return content;
 }
 
 
