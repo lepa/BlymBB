@@ -131,7 +131,7 @@ int blym::save_data (char *data, size_t size, size_t nsize, String *buffer)
 	return result;
 }
 
-String content 
+String content; 
 
 //Method used to get the content of files or web pages
 String blym::file_get_contents (String name)
