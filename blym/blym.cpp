@@ -17,18 +17,13 @@ blym::blym ()
 //Method to send queries in output
 void blym::echo (String allyouwant)
 {
-	std::cout  << allyouwant;
-}
-
-blym& blym::operator<<(String& allyouwant)
-{
-	std::cout  << allyouwant;
+	std::cout << allyouwant;
 }
 
 
 
 //Method to find GET requests
-String blym::GET ( String varname )
+String blym::GET (String varname)
 {
 	char* p;
 	String query, res="";
@@ -125,42 +120,37 @@ String& blym::nl2br ( String& to_escape )
 	return to_escape;
 }
 
-
+String buffer;
+//Huh that's.. MMM cool
+int blym::save_data (char *data, size_t size, size_t nsize, String *buffer)
+{
+	int result = 0;
+	if (buffer != NULL)
+	{
+		buffer->append(data, size * nsize);
+		result = size * nsize;
+	}
+	return result;
+}
 
 //Method used to get the content of files or web pages
-String blym::file_get_contents (String name )
+String blym::file_get_contents (String name)
+
 {
 	int i = 0;
 	String content;
 
-	if ( name.compare(0,7, "http://") == 0 )
+	if (name.compare (0,7, "http://") == 0)
 	{
-		int sock = socket ( AF_INET, SOCK_STREAM, 0 );
-		struct hostent *hostinfo;
-		struct sockaddr_in addr;
-		String message = "GET "+name.substr (name.find('/',8), -1 );
-		char buffer[100];
-
-		hostinfo = gethostbyname ( name.substr(6,name.find('/',8)).c_str() );
-			
-		if ( !hostinfo || sock < 3 )
-			throw ConnError;
-		
-
-		addr.sin_family = AF_INET;
-		addr.sin_port   = 80;
-		addr.sin_addr   = *(struct in_addr* ) *hostinfo->h_addr_list;
-
-		if ( connect ( sock, (struct sockaddr* ) &addr, sizeof (addr) ) != 0 )
-			throw ConnError;
-
-		send ( sock, message.c_str(), message.length(), 0 );
-
-		while ( recv ( sock, (void*) buffer, 100, 0 ) > 0 )
-		{
-			content+=buffer;
-			memset (buffer, '\0', 100);
-		}
+		name.substr (7,name.find('/',8));
+		CURL* ch = curl_easy_init();
+		curl_easy_setopt (ch, CURLOPT_URL, (name.substr(7,name.find('/',8))).c_str());
+		curl_easy_setopt (ch, CURLOPT_HEADER, 0);
+		curl_easy_setopt (ch,CURLOPT_WRITEFUNCTION, blym::save_data); 
+		curl_easy_setopt (ch, CURLOPT_WRITEDATA,&buffer);
+		curl_easy_perform (ch);
+		curl_easy_cleanup (ch);
+		content = buffer;
 	} 
 	else 
 	{

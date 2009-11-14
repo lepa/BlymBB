@@ -5,8 +5,7 @@
 #include <cstdio>
 #include <cstring>
 #include <exception>
-#include <sys/socket.h>
-#include <netdb.h>
+#include <curl/curl.h>
 
 typedef std::string String;
 
@@ -26,9 +25,10 @@ public:
 	
 	String& htmlentities ( String& );
 	String& nl2br ( String& );
-	String file_get_contents (String& );
+ 	String file_get_contents (String ); 
+protected :
+	static int save_data(char*, size_t, size_t, String*);
 };
-
 
 //The exceptions
 class fileExists : public std::exception
