@@ -28,7 +28,7 @@ public:
  	String file_get_contents ( String ); 
 	String sql_escape( String );
 protected :
-	int save_data(char*, size_t, size_t, String*);
+	static int save_data(char*, size_t, size_t, String*);
 };
 
 //The exceptions
