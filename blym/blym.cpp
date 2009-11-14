@@ -145,7 +145,7 @@ String blym::file_get_contents (String name)
 		curl_easy_setopt (ch, CURLOPT_WRITEFUNCTION, blym::save_data); 
 		curl_easy_setopt (ch, CURLOPT_WRITEDATA,&content);
 		curl_easy_perform (ch);
-		curl_easy_c leanup (ch);
+		curl_easy_cleanup (ch);
 	} 
 	else 
 	{
