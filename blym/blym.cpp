@@ -181,7 +181,7 @@ String blym::COOKIE (String name)
 
 String blym::sql_escape (String query)
 {
-	String keys[] = {"INSERT","AND","UNION","SELECT","CONCAT","/","+"," "};
+	String keys[] = {"INSERT", "AND", "UNION", "SELECT", "CONCAT", "/", "+", " ", "'", "\"\""};
 	for (int i=0; i<= (sizeof (keys) / sizeof (String)); i++)  {
 		if (query .find (keys[i]) != String::npos)
 			return query.erase (query.find (keys[i]));
