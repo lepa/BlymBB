@@ -120,7 +120,7 @@ String& blym::nl2br ( String& to_escape )
 	return to_escape;
 }
 
-String buffer;
+String content;
 //Huh that's.. MMM cool
 int blym::save_data (char *data, size_t size, size_t nsize, String *buffer)
 {
@@ -128,7 +128,7 @@ int blym::save_data (char *data, size_t size, size_t nsize, String *buffer)
 	if (buffer != NULL)
 	{
 		buffer->append(data, size * nsize);
-		result = size * nsize;
+		result  = size * nsize;
 	}
 	return result;
 }
@@ -138,19 +138,15 @@ String blym::file_get_contents (String name)
 
 {
 	int i = 0;
-	String content;
-
 	if (name.compare (0,7, "http://") == 0)
 	{
-		name.substr (7,name.find('/',8));
 		CURL* ch = curl_easy_init();
 		curl_easy_setopt (ch, CURLOPT_URL, (name.substr(7,name.find('/',8))).c_str());
 		curl_easy_setopt (ch, CURLOPT_HEADER, 0);
 		curl_easy_setopt (ch,CURLOPT_WRITEFUNCTION, blym::save_data); 
-		curl_easy_setopt (ch, CURLOPT_WRITEDATA,&buffer);
+		curl_easy_setopt (ch, CURLOPT_WRITEDATA,&content);
 		curl_easy_perform (ch);
 		curl_easy_cleanup (ch);
-		content = buffer;
 	} 
 	else 
 	{
