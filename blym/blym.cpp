@@ -9,17 +9,8 @@ fOpenError FOpenError;
 blym::blym ()
 {
 	//Says that the content is simple html 
-	this->echo ("Content-type: text/html\n\n");
+	blymout << "Content-type: text/html\n\n";
 }
-
-
-
-//Method to send queries in output
-void blym::echo (String allyouwant)
-{
-	std::cout << allyouwant;
-}
-
 
 
 //Method to find GET requests
@@ -142,7 +133,7 @@ String blym::file_get_contents (String name)
 		CURL* ch = curl_easy_init ();
 		curl_easy_setopt (ch, CURLOPT_URL, (name.substr (7,name.find ('/',8))).c_str ());
 		curl_easy_setopt (ch, CURLOPT_HEADER, 0);
-		curl_easy_setopt (ch, CURLOPT_WRITEFUNCTION, blym::save_data); 
+		curl_easy_setopt (ch, CURLOPT_WRITEFUNCTION, this->save_data); 
 		curl_easy_setopt (ch, CURLOPT_WRITEDATA,&content);
 		curl_easy_perform (ch);
 		curl_easy_cleanup (ch);
