@@ -107,7 +107,7 @@ void blym::setcookie (std::map<String, String> &myCookie)
 	std::map<String, String>::iterator it;
 	for (myCookie.begin (); it != myCookie.end (); it++)
 	{
-		*this << "Set-Cookie:" << (*it).first << "=" << (*it).second << "/n";
+		*this << "Set-Cookie:" << (*it).first << "=" << (*it).second << "\n";
 	}
 }
 
