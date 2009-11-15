@@ -15,6 +15,26 @@ blym::blym ()
 	this->get_COOKIE();
 }
 
+//Usage
+//Cookie newCookie;
+//newCookie['name'] = "value";
+//blym blymobj(newCookie);
+explicit blym ( const Cookie& myCookie )
+{
+	Cookie::iterator it;
+	
+	for (myCookie.begin (); it != myCookie.end (); it++)
+	{
+		*this << "Set-Cookie:" << (*it).first << "=" << (*it).second << ";\n";
+	}
+	
+	*this << "Content-type: text/html\n\n";
+	this->get_COOKIE ();
+	this->get_POST ();
+	this->get_GET ();
+}
+
+
 
 blym& blym::operator<< (String str)
 {

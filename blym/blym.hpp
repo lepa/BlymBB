@@ -9,15 +9,17 @@
 #include <map>
 
 typedef std::string String;
+typedef std::map<String,String> Cookie;
 
 class blym
 {
 public:
 	blym ();
+	explicit blym (const Cookie&);
 
 	std::map<String,String> GET;
 	std::map<String,String> POST;
-	std::map<String,String> COOKIE;
+	Cookie COOKIE;
 
 	String file_get_contents (String);
 	String sql_escape (String);
@@ -28,8 +30,6 @@ public:
 	
 	String& htmlentities (String&);
 	String& nl2br (String&);
-
-	void setcookie (std::map<String,String>&);
 
 	blym& operator<< (String);
 	blym& operator<< (int);
