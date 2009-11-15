@@ -26,8 +26,6 @@ public:
 
 	bool is_set (String);
 
-	char* get_client_ip ();
-	
 	String& htmlentities (String&);
 	String& nl2br (String&);
 

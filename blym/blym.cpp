@@ -133,15 +133,6 @@ void blym::get_COOKIE ()
 	}
 }
 
-
-//Method to get the web client ip
-char* blym::get_client_ip()
-{
-	return getenv ("REMOTE_ADDR");
-}
-
-
-
 //The name is explicative
 String& blym::htmlentities (String& to_escape)
 {
