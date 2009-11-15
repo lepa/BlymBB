@@ -7,14 +7,14 @@
 #include <exception>
 #include <curl/curl.h>
 
+#define blymout std::cout
+
 typedef std::string String;
 
 class blym
 {
 public:
 	blym ();
-
-	void echo (String); 
 	
 	String GET (String);
 	String POST (String);
