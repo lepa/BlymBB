@@ -93,10 +93,28 @@ void blym::get_POST ()
 		} while ( j != -1 );
 	}
 }
-
-void blym::get_COOKIE ()
+↲void blym::get_COOKIE ()
 {
+	char* p;
+	String query, varname, value;
+	int i, j, l;
+
+	if ( ( p = std::getenv ("HTTP_COOKIE") ) != NULL )
+	{
+		query = p;
+
+		do {
+			l = query.find ("=",i);
+			j = query.find (";",l);
+			varname = query.substr (i, l-i);
+			value = query.substr (l+1, j-(l+1));
+			i = j+1;↲
+			this->GET[varname] = value;
+		} while ( j != -1 );
+	}
 }
+
+
 
 //Usage
 //std::map<String, String> newCookie;
@@ -232,5 +250,7 @@ bool blym::is_set (String to_check)
 {
 	return (to_check.length ()) ? true : false;
 }
+
+
 
 
