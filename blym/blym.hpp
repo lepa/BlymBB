@@ -14,6 +14,7 @@ typedef std::map<String,String> StringMap;
 class blym
 {
 public:
+	blym ();
 	explicit blym (StringMap&); 
 
 	StringMap GET;

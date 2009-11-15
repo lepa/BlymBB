@@ -4,6 +4,13 @@ fileExists FileExists;
 connError ConnError;
 fOpenError FOpenError;
 
+blym::blym ()
+{
+	*this << "Content-type: text/html\n\n";
+	this->get_COOKIE ();
+	this->get_GET ();
+	this->get_POST ();
+}
 
 //Usage
 //Cookie newCookie;
