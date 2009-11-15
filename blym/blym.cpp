@@ -99,7 +99,7 @@ void blym::get_COOKIE ()
 }
 
 //Usage
-//Cookie newCookie;
+//std::map<String, String> newCookie;
 //newCookie['name'] = "value";
 //blym::setcookie (newCookie);
 void blym::setcookie (std::map<String, String> &myCookie)
