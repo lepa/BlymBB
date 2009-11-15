@@ -12,6 +12,7 @@ blym::blym ()
 	*this << "Content-type: text/html\n\n";
 	this->get_GET ();
 	this->get_POST ();
+	this->get_COOKIE();
 }
 
 
