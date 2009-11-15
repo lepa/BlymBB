@@ -39,6 +39,11 @@ blym& blym::operator<< (long i)
 	std::cout << i;
 }
 
+blym& blym::operator<< (char c)
+{
+	std::cout << c;
+}
+
 
 //Method to save GET requests
 void blym::get_GET_requests ()

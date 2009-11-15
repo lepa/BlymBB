@@ -32,6 +32,7 @@ public:
 	blym& operator<< (float);
 	blym& operator<< (double);
 	blym& operator<< (long);
+	blym& operator<< (char);
 
 protected :
 	static int save_data(char*, size_t, size_t, String*);
