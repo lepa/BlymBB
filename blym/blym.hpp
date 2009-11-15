@@ -17,10 +17,8 @@ public:
 	blym ();
 	explicit blym (StringMap&); 
 
-
 	String file_get_contents (String);
 	String sql_escape (String);
-
 
 	String& htmlentities (String&);
 	String& nl2br (String&);
@@ -40,7 +38,7 @@ public:
 
 protected :
 	static int save_data(char*, size_t, size_t, String*);
-i
+
 	void get_GET ();
 	void get_POST ();
 	void get_COOKIE  ();
