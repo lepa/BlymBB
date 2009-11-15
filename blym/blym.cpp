@@ -9,9 +9,9 @@ fOpenError FOpenError;
 //Cookie newCookie;
 //newCookie['name'] = "value";
 //blym blymobj(newCookie);
-blym::blym (Cookie& myCookie)
+blym::blym (StringMap& myCookie)
 {
-	Cookie::iterator it;
+	StringMap::iterator  it;
 	
 	for (myCookie.begin (); it != myCookie.end (); it++)
 	{

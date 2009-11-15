@@ -9,16 +9,16 @@
 #include <map>
 
 typedef std::string String;
-typedef std::map<String,String> Cookie;
+typedef std::map<String,String> StringMap;
 
 class blym
 {
 public:
-	explicit blym (Cookie&);
+	explicit blym (StringMap&); 
 
-	std::map<String,String> GET;
-	std::map<String,String> POST;
-	Cookie COOKIE;
+	StringMap GET;
+	StringMap POST;
+	StringMap COOKIE;
 
 	String file_get_contents (String);
 	String sql_escape (String);
