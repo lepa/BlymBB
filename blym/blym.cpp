@@ -8,11 +8,12 @@ fOpenError FOpenError;
 // Constructor
 blym::blym ()
 {
-	//Says that the content is simple html 
+ 	//Tells that the content is simple html 
 	*this << "Content-type: text/html\n\n";
-	this->get_GET_requests ();
-	this->get_POST_requests ();
+	this->get_GET ();
+	this->get_POST ();
 }
+
 
 blym& blym::operator<< (String str)
 {
@@ -46,7 +47,7 @@ blym& blym::operator<< (char c)
 
 
 //Method to save GET requests
-void blym::get_GET_requests ()
+void blym::get_GET ()
 {
 	char* p;
 	String query, varname, value;
@@ -68,7 +69,7 @@ void blym::get_GET_requests ()
 }
 
 //Method to save POST requests
-void blym::get_POST_requests ()
+void blym::get_POST ()
 {
 	int len;
 	char* p;
@@ -93,6 +94,22 @@ void blym::get_POST_requests ()
 	}
 }
 
+void blym::get_COOKIE ()
+{
+}
+
+//Usage
+//Cookie newCookie;
+//newCookie['name'] = "value";
+//blym::setcookie (newCookie);
+void blym::setcookie (std::map<String, String> &myCookie)
+{
+	std::map<String, String>::iterator it;
+	for (myCookie.begin (); it != myCookie.end (); it++)
+	{
+		*this << "Set-Cookie:" << (*it).first << "=" << (*it).second << "/n";
+	}
+}
 
 //Method to get the web client ip
 char* blym::get_client_ip()

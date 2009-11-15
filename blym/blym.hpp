@@ -17,7 +17,7 @@ public:
 
 	std::map<String,String> GET;
 	std::map<String,String> POST;
-	
+
 	String COOKIE (String);
 	String file_get_contents (String);
 	String sql_escape (String);
@@ -29,6 +29,8 @@ public:
 	String& htmlentities (String&);
 	String& nl2br (String&);
 
+	void setcookie (std::map<String,String>&);
+
 	blym& operator<< (String);
 	blym& operator<< (int);
 	blym& operator<< (float);
@@ -38,8 +40,9 @@ public:
 
 protected :
 	static int save_data(char*, size_t, size_t, String*);
-	void get_GET_requests ();
-	void get_POST_requests ();
+	void get_GET ();
+	void get_POST ();
+	void get_COOKIE ();
 };
 
 //The exceptions
