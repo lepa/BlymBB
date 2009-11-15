@@ -1,5 +1,5 @@
 all:
-	g++ -o libblym.so -lcurl -Wl,-soname,libblym.so -shared blym.cpp -fPIC -ansi -pedantic -L../String/ -lString
+	g++ -o libblym.so -lcurl -Wl,-soname,libblym.so -shared blym.cpp -fPIC -ansi -pedantic 
 install:
 	cp libblym.so /usr/lib/
 test:
