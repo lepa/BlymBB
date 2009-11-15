@@ -187,8 +187,6 @@ String blym::file_get_contents (String name)
  	return content; 
 }
 
-
-
 //Method for cookies
 String blym::COOKIE (String name)
 {
@@ -210,6 +208,11 @@ String blym::sql_escape (String query)
 		else
 			continue; 
 	}
-	return query; 
+ 	return query; 
+}
+
+bool blym::is_set (String to_check)
+{
+	return (to_check.length ()) ? true : false;
 }
 

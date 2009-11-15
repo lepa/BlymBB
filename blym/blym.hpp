@@ -22,6 +22,8 @@ public:
 	String file_get_contents (String);
 	String sql_escape (String);
 
+	bool is_set (String);
+
 	char* get_client_ip ();
 	
 	String& htmlentities (String&);
