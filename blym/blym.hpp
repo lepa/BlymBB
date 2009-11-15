@@ -17,8 +17,8 @@ public:
 
 	std::map<String,String> GET;
 	std::map<String,String> POST;
+	std::map<String,String> COOKIE;
 
-	String COOKIE (String);
 	String file_get_contents (String);
 	String sql_escape (String);
 

@@ -93,7 +93,7 @@ void blym::get_POST ()
 		} while ( j != -1 );
 	}
 }
-↲void blym::get_COOKIE ()
+void blym::get_COOKIE ()
 {
 	char* p;
 	String query, varname, value;
@@ -108,8 +108,8 @@ void blym::get_POST ()
 			j = query.find (";",l);
 			varname = query.substr (i, l-i);
 			value = query.substr (l+1, j-(l+1));
-			i = j+1;↲
-			this->GET[varname] = value;
+			i = j+1;
+			this->COOKIE[varname] = value;
 		} while ( j != -1 );
 	}
 }
@@ -222,18 +222,6 @@ String blym::file_get_contents (String name)
  	return content; 
 }
 
-//Method for cookies
-String blym::COOKIE (String name)
-{
-	String cookies = std::getenv ("HTTP_COOKIE");
-
-	return cookies.substr ( 
-			cookies.find  (name)
-			+ name.length () + 1,
-			cookies.find ("; ")
-			);
-}
-
 String blym::sql_escape (String query)
 {
 	String keys[] = {"INSERT", "AND", "UNION", "SELECT", "CONCAT", "/", "+", " ", "'", "\"\""};
@@ -250,7 +238,4 @@ bool blym::is_set (String to_check)
 {
 	return (to_check.length ()) ? true : false;
 }
-
-
-
 
