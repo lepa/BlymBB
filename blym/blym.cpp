@@ -120,13 +120,14 @@ void blym::get_COOKIE ()
 //std::map<String, String> newCookie;
 //newCookie['name'] = "value";
 //blym::setcookie (newCookie);
-void blym::setcookie (std::map<String, String> &myCookie)
+void blym::setcookie (std::map<String, String>& myCookie)
 {
 	std::map<String, String>::iterator it;
 	for (myCookie.begin (); it != myCookie.end (); it++)
 	{
 		*this << "Set-Cookie:" << (*it).first << "=" << (*it).second << ";\n";
 	}
+	this->get_COOKIE();
 }
 
 //Method to get the web client ip
