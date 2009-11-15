@@ -5,21 +5,11 @@ connError ConnError;
 fOpenError FOpenError;
 
 
-// Constructor
-blym::blym ()
-{
- 	//Tells that the content is simple html 
-	*this << "Content-type: text/html\n\n";
-	this->get_GET ();
-	this->get_POST ();
-	this->get_COOKIE();
-}
-
 //Usage
 //Cookie newCookie;
 //newCookie['name'] = "value";
 //blym blymobj(newCookie);
-explicit blym ( const Cookie& myCookie )
+blym::blym (Cookie& myCookie)
 {
 	Cookie::iterator it;
 	
@@ -31,7 +21,7 @@ explicit blym ( const Cookie& myCookie )
 	*this << "Content-type: text/html\n\n";
 	this->get_COOKIE ();
 	this->get_POST ();
-	this->get_GET ();
+ 	this->get_GET ();
 }
 
 
@@ -135,21 +125,6 @@ void blym::get_COOKIE ()
 	}
 }
 
-
-
-//Usage
-//std::map<String, String> newCookie;
-//newCookie['name'] = "value";
-//blym::setcookie (newCookie);
-void blym::setcookie (std::map<String, String>& myCookie)
-{
-	std::map<String, String>::iterator it;
-	for (myCookie.begin (); it != myCookie.end (); it++)
-	{
-		*this << "Set-Cookie:" << (*it).first << "=" << (*it).second << ";\n";
-	}
-	this->get_COOKIE();
-}
 
 //Method to get the web client ip
 char* blym::get_client_ip()

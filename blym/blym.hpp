@@ -14,8 +14,7 @@ typedef std::map<String,String> Cookie;
 class blym
 {
 public:
-	blym ();
-	explicit blym (const Cookie&);
+	explicit blym (Cookie&);
 
 	std::map<String,String> GET;
 	std::map<String,String> POST;
