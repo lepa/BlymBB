@@ -1,4 +1,4 @@
-#include "blym.h"
+#include "blym.hpp"
 //Exception objects
 fileExists FileExists;
 connError ConnError;
