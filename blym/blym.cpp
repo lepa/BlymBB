@@ -4,6 +4,7 @@ fileExists FileExists;
 connError ConnError;
 fOpenError FOpenError;
 
+//standard constructor
 blym::blym ()
 {
 	*this << "Content-type: text/html\n\n";
@@ -13,7 +14,7 @@ blym::blym ()
 }
 
 //Usage
-//Cookie newCookie;
+//StringMap newCookie;
 //newCookie['name'] = "value";
 //blym blymobj(newCookie);
 blym::blym (StringMap& myCookie)
