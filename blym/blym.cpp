@@ -9,58 +9,84 @@ fOpenError FOpenError;
 blym::blym ()
 {
 	//Says that the content is simple html 
-	blymout << "Content-type: text/html\n\n";
+	*this << "Content-type: text/html\n\n";
+	this->get_GET_requests ();
+	this->get_POST_requests ();
+}
+
+blym& blym::operator<< (String str)
+{
+	std::cout << str;
+}
+
+blym& blym::operator<< (int i)
+{
+	std::cout << i;
+}
+
+blym& blym::operator<< (double i)
+{
+	std::cout << i;
+}
+
+blym& blym::operator<< (float i)
+{
+	std::cout << i;
+}
+
+blym& blym::operator<< (long i)
+{
+	std::cout << i;
 }
 
 
-//Method to find GET requests
-String blym::GET (String varname)
+//Method to save GET requests
+void blym::get_GET_requests ()
 {
 	char* p;
-	String query, res="";
+	String query, varname, value;
+	int i, j, l;
 
-// If there is a get request 
-	if ((( p = std::getenv ( "QUERY_STRING" )) != NULL) )	
+	if ( ( p = std::getenv ("QUERY_STRING") ) != NULL )
 	{
 		query = p;
 
-		if (query.find (varname) != -1)    //If find varname
-			res = query.substr (		   //Create a substring
-				query.find (varname) +
-				varname.length () + 1,   //That starts at varname's position +1
-				query.find ("&")          //And ends when finds an & or at the end of the string
-			); 
-	} 
-
-	return res; 
+		do {
+			l = query.find ("=",i);
+			j = query.find ("&",l);
+			varname = query.substr (i, l-i);
+			value = query.substr (l+1, j-(l+1));
+			i = j+1;
+			this->GET[varname] = value;
+		} while ( j != -1 );
+	}
 }
 
-
-
-//Method to find POST requests
-String blym::POST (String varname)
+//Method to save POST requests
+void blym::get_POST_requests ()
 {
-	String query,  res = "";
-	int length;
-	std::stringbuf buffer;
+	int len;
+	char* p;
+	String query, varname, value;
+	int i, j, l;
 
-	//Gets the content length
-	if (std::sscanf (getenv ("CONTENT_LENGTH"), "%d", &length) == 1) 
+	if (std::sscanf ( (char*) std::getenv ("CONTENT_LENGTH"), "%d", &len ) == 1 )
 	{
-		std::cin.get (buffer); 
-		query = buffer.str ();
-			
-		if (query.find (varname) != -1) 
-			res = query.substr (
-				query.find (varname) +
-				varname.length () + 1,
-				query.find ("&")
-			);
-	} 
+		p = new char [len];
+		fgets (p, len, stdin);
+		query = p;
+		delete[] p;
 
-	return res;
+		do {
+			l = query.find ("=",i);
+			j = query.find ("&",l);
+			varname = query.substr (i, l-i);
+			value = query.substr (l+1, j-(l+1));
+			i = j+1;
+			this->POST[varname] = value;
+		} while ( j != -1 );
+	}
 }
-
 
 
 //Method to get the web client ip

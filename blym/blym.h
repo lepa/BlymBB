@@ -6,8 +6,7 @@
 #include <cstring>
 #include <exception>
 #include <curl/curl.h>
-
-#define blymout std::cout
+#include <map>
 
 typedef std::string String;
 
@@ -15,9 +14,10 @@ class blym
 {
 public:
 	blym ();
+
+	std::map<String,String> GET;
+	std::map<String,String> POST;
 	
-	String GET (String);
-	String POST (String);
 	String COOKIE (String);
 	String file_get_contents (String);
 	String sql_escape (String);
@@ -27,8 +27,16 @@ public:
 	String& htmlentities (String&);
 	String& nl2br (String&);
 
+	blym& operator<< (String);
+	blym& operator<< (int);
+	blym& operator<< (float);
+	blym& operator<< (double);
+	blym& operator<< (long);
+
 protected :
 	static int save_data(char*, size_t, size_t, String*);
+	void get_GET_requests ();
+	void get_POST_requests ();
 };
 
 //The exceptions
