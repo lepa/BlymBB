@@ -33,38 +33,6 @@ blym::blym (StringMap& myCookie)
 }
 
 
-
-blym& blym::operator<< (String str)
-{
-	std::cout << str;
-}
-
-blym& blym::operator<< (int i)
-{
-	std::cout << i;
-}
-
-blym& blym::operator<< (double i)
-{
-	std::cout << i;
-}
-
-blym& blym::operator<< (float i)
-{
-	std::cout << i;
-}
-
-blym& blym::operator<< (long i)
-{
-	std::cout << i;
-}
-
-blym& blym::operator<< (char c)
-{
-	std::cout << c;
-}
-
-
 //Method to save GET requests
 void blym::get_GET ()
 {
@@ -85,6 +53,12 @@ void blym::get_GET ()
 			this->GET[varname] = value;
 		} while ( j != -1 );
 	}
+}
+
+template <class T>
+blym& blym::operator<< (T something)
+{
+	std::cout << something;
 }
 
 //Method to save POST requests

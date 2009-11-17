@@ -10,7 +10,6 @@
 
 typedef std::string String;
 typedef std::map<String,String> StringMap;
-
 class blym
 {
 public:
@@ -29,12 +28,8 @@ public:
 	
 	bool is_set (String);
 
-	blym& operator<< (String);
-	blym& operator<< (int);
-	blym& operator<< (float);
-	blym& operator<< (double);
-	blym& operator<< (long);
-	blym& operator<< (char);
+	template <class T>
+	blym& operator<< (T);
 
 protected :
 	static int save_data(char*, size_t, size_t, String*);
