@@ -22,9 +22,7 @@ blym::blym (StringMap& myCookie)
 	StringMap::iterator  it;
 	
 	for (myCookie.begin (); it != myCookie.end (); it++)
-	{
 		*this << "Set-Cookie:" << (*it).first << "=" << (*it).second << ";\n";
-	}
 	
 	*this << "Content-type: text/html\n\n";
 	this->get_COOKIE ();
@@ -86,6 +84,7 @@ void blym::get_POST ()
 		} while ( j != -1 );
 	}
 }
+
 void blym::get_COOKIE ()
 {
 	char* p;
@@ -117,10 +116,8 @@ String& blym::htmlentities (String& to_escape)
 		if ( (to_escape[i] >= 'A' && to_escape[i] <= 'Z') || 
 			(to_escape[i] >= 'a' && to_escape[i] <= 'z') || 
 		 	(to_escape[i] >= '0' && to_escape[i] <= '9') )  
-		{
 			i++; 
-		}
-		else 
+		else
 		{
 			std::sprintf (entity, "&#%2d;", (int) to_escape[i]);
 			to_escape.replace (i, 1, entity);
@@ -170,7 +167,7 @@ String blym::file_get_contents (String name)
 		curl_easy_setopt (ch, CURLOPT_URL, (name.substr (7,name.find ('/',8))).c_str ());
 		curl_easy_setopt (ch, CURLOPT_HEADER, 0);
 		curl_easy_setopt (ch, CURLOPT_WRITEFUNCTION, this->save_data); 
-		curl_easy_setopt (ch, CURLOPT_WRITEDATA,&content);
+		curl_easy_setopt (ch, CURLOPT_WRITEDATA,&::content);
 		curl_easy_perform (ch);
 		curl_easy_cleanup (ch);
 	} 
@@ -183,13 +180,11 @@ String blym::file_get_contents (String name)
 			throw ConnError;
 		String sent;
 		while (getline (file, sent))
-		{
-			content.append (sent.append ("\n"));
-		} 
+			::content.append (sent.append ("\n"));
 	file.close ();
 	}
 
- 	return content; 
+	return ::content; 
 }
 
 String blym::sql_escape (String query)
