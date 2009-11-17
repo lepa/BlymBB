@@ -10,6 +10,7 @@
 
 typedef std::string String;
 typedef std::map<String,String> StringMap;
+
 class blym
 {
 public:
